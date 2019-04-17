@@ -23,14 +23,6 @@ public class LogoutActivity extends AppCompatActivity {
         yesButton = findViewById(R.id.yes_button);
         noButton = findViewById(R.id.no_button);
 
-        yesButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, MainActivity.class);
-                context.startActivity(intent);
-                finish();
 
-            }
-        });
     }
 }

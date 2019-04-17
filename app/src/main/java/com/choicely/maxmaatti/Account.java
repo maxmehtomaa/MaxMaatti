@@ -4,11 +4,10 @@ public class Account {
 
     private String cardNumber;
     private int pinCode;
-    private static int balance;
+    private int balance;
+
 
     public Account() {
-        this.cardNumber = "420232181";
-        this.pinCode = 2321;
 
     }
 
