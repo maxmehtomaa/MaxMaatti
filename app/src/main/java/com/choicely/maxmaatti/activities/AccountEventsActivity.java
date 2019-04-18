@@ -1,8 +1,10 @@
-package com.choicely.maxmaatti;
+package com.choicely.maxmaatti.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.choicely.maxmaatti.R;
 
 public class AccountEventsActivity extends AppCompatActivity {
 

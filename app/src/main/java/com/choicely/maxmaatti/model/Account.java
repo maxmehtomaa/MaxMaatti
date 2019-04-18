@@ -1,8 +1,8 @@
-package com.choicely.maxmaatti;
+package com.choicely.maxmaatti.model;
 
 public class Account {
 
-    private String cardNumber;
+    private String accountId;
     private int pinCode;
     private int balance;
 
@@ -11,12 +11,18 @@ public class Account {
 
     }
 
+    public Account(String cardNumber, int balance, int pinCode) {
+        this.accountId = cardNumber;
+        this.pinCode = pinCode;
+        this.balance = balance;
+    }
+
     public String getCardNumber() {
-        return this.cardNumber;
+        return this.accountId;
     }
 
     public void setCardNumber(String cardNumber) {
-        this.cardNumber = cardNumber;
+        this.accountId = cardNumber;
     }
 
     public int getPinCode() {

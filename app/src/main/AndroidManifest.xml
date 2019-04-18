@@ -9,14 +9,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LogoutActivity"></activity>
-        <activity android:name=".AccountEventsActivity" />
-        <activity android:name=".BalanceActivity" />
-        <activity android:name=".TransactionActivity" />
-        <activity android:name=".DepositActivity" />
-        <activity android:name=".WithdrawalActivity" />
-        <activity android:name=".FeaturesActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".activities.LogoutActivity"></activity>
+        <activity android:name=".activities.AccountEventsActivity" />
+        <activity android:name=".activities.BalanceActivity" />
+        <activity android:name=".activities.TransactionActivity" />
+        <activity android:name=".activities.DepositActivity" />
+        <activity android:name=".activities.WithdrawalActivity" />
+        <activity android:name=".activities.FeaturesActivity" />
+        <activity android:name=".activities.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

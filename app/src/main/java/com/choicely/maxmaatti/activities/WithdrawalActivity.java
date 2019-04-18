@@ -1,4 +1,4 @@
-package com.choicely.maxmaatti;
+package com.choicely.maxmaatti.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,8 +7,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
+
+import com.choicely.maxmaatti.model.Account;
+import com.choicely.maxmaatti.R;
 
 
 public class WithdrawalActivity extends AppCompatActivity {

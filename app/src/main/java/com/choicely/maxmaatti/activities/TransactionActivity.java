@@ -1,10 +1,12 @@
-package com.choicely.maxmaatti;
+package com.choicely.maxmaatti.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.choicely.maxmaatti.R;
 
 public class TransactionActivity extends AppCompatActivity {
 
