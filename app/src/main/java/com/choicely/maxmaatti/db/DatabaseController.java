@@ -2,22 +2,14 @@ package com.choicely.maxmaatti.db;
 
 import android.util.Log;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Transaction;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class DatabaseController {
 
@@ -35,6 +27,7 @@ public class DatabaseController {
 
     public interface OnLoginListener {
         void loginSuccess();
+
         void loginFailed();
     }
 
@@ -78,49 +71,50 @@ public class DatabaseController {
     }
 
     public void deposit(int depositAmount) {
-        final DocumentReference docRef = db.collection("accounts").document(loggedInAccountId);
-
-        db.runTransaction((Transaction.Function<Void>) transaction -> {
-            DocumentSnapshot documentSnapshot = transaction.get(docRef);
-
-            int balance = documentSnapshot.getLong("account_balance").intValue() + depositAmount;
-
-            if (depositAmount < 0) {
-                return null;
-            } else {
-                transaction.update(docRef, "account_balance", balance);
-            }
-
-            return null;
-        })
-                .addOnSuccessListener(aVoid -> Log.d(TAG, "Deposit success!"))
-                .addOnFailureListener(e -> Log.d(TAG, "Deposit failure", e));
+        if (depositAmount < 0) {
+            Log.w(TAG, "Tried to deposit negative amount");
+            return;
+        }
+        internalBalanceChange(depositAmount);
     }
 
     public void withdrawal(int withdrawAmount) {
-        final DocumentReference docRef = db.collection("accounts").document(loggedInAccountId);
+        if (withdrawAmount > 0) {
+            withdrawAmount = -withdrawAmount;
+        }
+        internalBalanceChange(withdrawAmount);
+    }
 
+    private void internalBalanceChange(int amount) {
+        final DocumentReference docRef = db.collection("accounts").document(loggedInAccountId);
+        AtomicInteger balance = new AtomicInteger();
         db
                 .runTransaction((Transaction.Function<Void>) transaction -> {
                     DocumentSnapshot documentSnapshot = transaction.get(docRef);
 
-                    int balance = documentSnapshot.getLong("account_balance").intValue() - withdrawAmount;
+                    balance.set(documentSnapshot.getLong("account_balance").intValue() + amount);
 
-                    if (balance < 0) {
+                    if (balance.get() < 0) {
+                        // TODO: add listener, onFailure
                         return null;
                     } else {
-                        transaction.update(docRef, "account_balance", balance);
+                        transaction.update(docRef, "account_balance", balance.get());
                     }
 
                     return null;
                 })
-                .addOnSuccessListener(aVoid -> Log.d(TAG, "Withdraw success!"))
-                .addOnFailureListener(e -> Log.d(TAG, "Withdraw failure!", e));
+                .addOnSuccessListener(aVoid -> {
+                    Log.d(TAG, String.format("Balance change[%s] success!", amount));
+                    // TODO: add listener, onSuccess(balance)
+                })
+                .addOnFailureListener(e -> {
+                    Log.w(TAG, String.format("Balance change[%s] failed!", amount), e);
+                    // TODO: add listener, onFailure
+                });
     }
 
     public void transaction(String accountId, int transactionAmount) {
         final DocumentReference docRef = db.collection("accounts").document(loggedInAccountId);
-
     }
 
     public void fetchAccountBalance(BalanceListener callback) {
