@@ -32,59 +32,40 @@ public class FeaturesActivity extends AppCompatActivity {
         balanceButton = findViewById(R.id.balance_button);
         logoutButton = findViewById(R.id.logout_button);
 
-        withdrawButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                context = v.getContext();
-                Intent intent = new Intent(context, WithdrawalActivity.class);
-                context.startActivity(intent);
-            }
+        withdrawButton.setOnClickListener(v -> {
+            context = v.getContext();
+            Intent intent = new Intent(context, WithdrawalActivity.class);
+            context.startActivity(intent);
         });
 
-        balanceButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                context = v.getContext();
-                Intent intent = new Intent(context, BalanceActivity.class);
-                context.startActivity(intent);
-            }
+        balanceButton.setOnClickListener(v -> {
+            context = v.getContext();
+            Intent intent = new Intent(context, BalanceActivity.class);
+            context.startActivity(intent);
         });
 
-        depositButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                context = v.getContext();
-                Intent intent = new Intent(context, DepositActivity.class);
-                context.startActivity(intent);
-            }
+        depositButton.setOnClickListener(v -> {
+            context = v.getContext();
+            Intent intent = new Intent(context, DepositActivity.class);
+            context.startActivity(intent);
         });
 
-        transactionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                context = v.getContext();
-                Intent intent = new Intent(context, TransactionActivity.class);
-                context.startActivity(intent);
-            }
+        transactionButton.setOnClickListener(v -> {
+            context = v.getContext();
+            Intent intent = new Intent(context, TransactionActivity.class);
+            context.startActivity(intent);
         });
 
-        accountEventsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                context = v.getContext();
-                Intent intent = new Intent(context, AccountEventsActivity.class);
-                context.startActivity(intent);
-            }
+        accountEventsButton.setOnClickListener(v -> {
+            context = v.getContext();
+            Intent intent = new Intent(context, AccountEventsActivity.class);
+            context.startActivity(intent);
         });
 
-        logoutButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                context = v.getContext();
-                Intent intent = new Intent(context, LogoutActivity.class);
-                context.startActivity(intent);
-                finish();
-            }
+        logoutButton.setOnClickListener(v -> {
+            context = v.getContext();
+            Intent intent = new Intent(context, LogoutActivity.class);
+            context.startActivity(intent);
         });
     }
 }

@@ -4,17 +4,18 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.choicely.maxmaatti.db.DatabaseController;
 import com.choicely.maxmaatti.model.Account;
 import com.choicely.maxmaatti.R;
 
 
 public class WithdrawalActivity extends AppCompatActivity {
-
 
     private Account account;
     private Button withdraw20Button;
@@ -29,14 +30,11 @@ public class WithdrawalActivity extends AppCompatActivity {
     private int duration;
     private EditText withdrawOptionalField;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_withdrawal);
 
-        account = new Account();
-        final int balance = account.getBalance();
         context = getApplicationContext();
         duration = Toast.LENGTH_SHORT;
 
@@ -50,121 +48,59 @@ public class WithdrawalActivity extends AppCompatActivity {
 
         withdrawOptionalField = findViewById(R.id.withdraw_optional_field);
 
-        withdraw20Button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                CharSequence text = "You withdrawed 20 euros!";
-                CharSequence error = "You dont have enough money to withdraw!";
-                if (balance < 20 || balance <= 0) {
-                    toast = toast.makeText(context, error, duration);
-                    toast.show();
-                } else {
-                    account.setBalance(balance - 20);
-                    toast = Toast.makeText(context, text, duration);
-                    toast.show();
-                }
-            }
+        withdraw20Button.setOnClickListener(v -> {
+            CharSequence text = "You withdraw'd 20 euros";
+            Toast.makeText(context, text, duration).show();
+            DatabaseController.getInstance().withdrawal(20);
         });
 
-        withdraw40Button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                CharSequence text = "You withdrawed 40 euros!";
-                CharSequence error = "You dont have enough money to withdraw!";
-                if (balance < 40 || balance <= 0) {
-                    toast = Toast.makeText(context, error, duration);
-                    toast.show();
-                } else {
-                    account.setBalance(balance - 40);
-                    toast = Toast.makeText(context, text, duration);
-                    toast.show();
-                }
-            }
+        withdraw40Button.setOnClickListener(v -> {
+            CharSequence text = "You withdraw'd 40 euros!";
+            Toast.makeText(context, text, duration).show();
+            DatabaseController.getInstance().withdrawal(40);
+
         });
 
-        withdraw60Button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                CharSequence text = "You withdrawed 60 euros!";
-                CharSequence error = "You dont have enough money to withdraw!";
-               if (balance < 60 || balance <= 0) {
-                   toast = Toast.makeText(context, error, duration);
-                   toast.show();
-               }else {
-                   account.setBalance(balance - 60);
-                   toast = Toast.makeText(context, text, duration);
-                   toast.show();
-               }
-            }
+        withdraw60Button.setOnClickListener(v -> {
+            CharSequence text = "You withdraw'd 60 euros!";
+            Toast.makeText(context, text, duration).show();
+            DatabaseController.getInstance().withdrawal(60);
+
         });
 
-        withdraw100Button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                CharSequence text = "You withdrawed 100 euros!";
-                CharSequence error = "You dont have enough money to withdraw!";
-
-                if (balance < 100 || balance <= 0) {
-                    toast = Toast.makeText(context, error, duration);
-                    toast.show();
-                } else {
-                    account.setBalance(balance - 100);
-                    toast = Toast.makeText(context, text, duration);
-                    toast.show();
-                }
-            }
+        withdraw100Button.setOnClickListener(v -> {
+            CharSequence text = "You withdraw'd 100 euros!";
+            Toast.makeText(context, text, duration).show();
+            DatabaseController.getInstance().withdrawal(100);
         });
 
-        withdraw140Button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                CharSequence text = "You withdrawed 140 euros!";
-                CharSequence error = "You dont have enough money to withdraw!";
-                if (balance < 140 || balance <= 0) {
-                    toast = Toast.makeText(context, error, duration);
-                    toast.show();
-                } else {
-                    account.setBalance(balance - 140);
-                    toast = Toast.makeText(context, text, duration);
-                    toast.show();
-                }
-            }
+        withdraw140Button.setOnClickListener(v -> {
+            CharSequence text = "You withdraw'd 140 euros!";
+            Toast.makeText(context, text, duration).show();
+            DatabaseController.getInstance().withdrawal(140);
         });
 
-        withdraw200Button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                CharSequence text = "You withdrawed 200 euros!";
-                CharSequence error = "You dont have enough money to withdraw!";
+        withdraw200Button.setOnClickListener(v -> {
+            CharSequence text = "You withdraw'd 200 euros!";
+            Toast.makeText(context, text, duration).show();
+            DatabaseController.getInstance().withdrawal(200);
 
-                if (balance < 200 || balance <= 0) {
-                    toast = Toast.makeText(context, error, duration);
-                    toast.show();
-                } else {
-                    account.setBalance(balance - 200);
-                    toast = Toast.makeText(context, text, duration);
-                    toast.show();
-                }
-            }
         });
 
-        withdrawOptionalButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int number = Integer.parseInt(withdrawOptionalField.getText().toString());
+        withdrawOptionalButton.setOnClickListener(v -> {
+            int number = Integer.parseInt(withdrawOptionalField.getText().toString());
+
+            if (number <= 0) {
+                CharSequence negativeValue = "Negative withdraw amount!";
+                Toast.makeText(context, negativeValue, duration).show();
+            } else {
                 CharSequence text = "You withdrawed " + number + " euros!";
-                CharSequence error = "You dont have enough money to withdraw!";
-
-                if (balance < number || balance <= 0) {
-                    toast = Toast.makeText(context, error, duration);
-                    toast.show();
-                } else {
-                    account.setBalance(balance - number);
-                    withdrawOptionalField.setText(null);
-                    toast = Toast.makeText(context, text, duration);
-                    toast.show();
-                }
+                DatabaseController.getInstance().withdrawal(number);
+                Toast.makeText(context, text, duration).show();
+                withdrawOptionalField.setText(null);
             }
+            CharSequence error = "You dont have enough money to withdraw!";
+
         });
     }
 }

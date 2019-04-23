@@ -3,6 +3,7 @@ package com.choicely.maxmaatti.activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -25,21 +26,26 @@ public class DepositActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_deposit);
 
-
         context = getApplicationContext();
         duration = Toast.LENGTH_SHORT;
 
         depositAmountText = findViewById(R.id.deposit_amount);
         depositButton = findViewById(R.id.deposit_button);
 
-        depositButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int number = Integer.parseInt(depositAmountText.getText().toString());
-                CharSequence text = "You deposited " + number + " euros!";
+        depositButton.setOnClickListener(v -> {
+            int number = Integer.parseInt(depositAmountText.getText().toString());
+            if (number < 0) {
+                CharSequence text = "Negative deposit amount!";
                 Toast.makeText(context, text, duration).show();
+            } else {
+                CharSequence text = "You deposited " + number + " euros!";
+                DatabaseController.getInstance().deposit(number);
+                Toast toastMessage = Toast.makeText(context, text, duration);
+                View toastView = toastMessage.getView();
+                toastView.setBackgroundColor(Color.RED);
+                toastMessage.show();
                 depositAmountText.setText(null);
             }
-    });
+        });
     }
 }

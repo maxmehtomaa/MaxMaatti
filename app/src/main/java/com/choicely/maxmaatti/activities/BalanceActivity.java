@@ -21,15 +21,11 @@ public class BalanceActivity extends AppCompatActivity {
         setContentView(R.layout.activity_balance);
         balanceView = findViewById(R.id.balance_view);
         showBalance();
-
     }
 
     public void showBalance() {
-
         DatabaseController.getInstance().fetchAccountBalance(balance -> {
             balanceView.setText(String.format(Locale.ENGLISH, "%d€", balance));
         });
-
     }
-
 }

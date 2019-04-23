@@ -6,7 +6,6 @@ public class Account {
     private int pinCode;
     private int balance;
 
-
     public Account() {
 
     }

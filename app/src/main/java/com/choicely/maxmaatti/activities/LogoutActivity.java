@@ -25,6 +25,13 @@ public class LogoutActivity extends AppCompatActivity {
         yesButton = findViewById(R.id.yes_button);
         noButton = findViewById(R.id.no_button);
 
+        yesButton.setOnClickListener(v -> {
+            Intent intent = new Intent(LogoutActivity.this, LoginActivity.class);
+            startActivity(intent);
+            finish();
+        });
+
+        noButton.setOnClickListener(v -> finish());
 
     }
 }

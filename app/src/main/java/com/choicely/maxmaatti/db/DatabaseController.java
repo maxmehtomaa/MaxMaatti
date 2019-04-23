@@ -2,17 +2,22 @@ package com.choicely.maxmaatti.db;
 
 import android.util.Log;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Transaction;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.annotation.Nullable;
-
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 public class DatabaseController {
 
@@ -37,10 +42,6 @@ public class DatabaseController {
         void onBalance(int balance);
     }
 
-    public interface DepositListener {
-        void onDeposit(int depositAmount);
-    }
-
     public static DatabaseController getInstance() {
         if (instance == null) {
             instance = new DatabaseController();
@@ -52,7 +53,6 @@ public class DatabaseController {
         db.collection("accounts").document(accountId)
                 .get()
                 .addOnCompleteListener(task -> {
-                    Log.d(TAG, "A");
                     if (task.isSuccessful()) {
                         DocumentSnapshot documentSnapshot = task.getResult();
 
@@ -77,6 +77,52 @@ public class DatabaseController {
                 });
     }
 
+    public void deposit(int depositAmount) {
+        final DocumentReference docRef = db.collection("accounts").document(loggedInAccountId);
+
+        db.runTransaction((Transaction.Function<Void>) transaction -> {
+            DocumentSnapshot documentSnapshot = transaction.get(docRef);
+
+            int balance = documentSnapshot.getLong("account_balance").intValue() + depositAmount;
+
+            if (depositAmount < 0) {
+                return null;
+            } else {
+                transaction.update(docRef, "account_balance", balance);
+            }
+
+            return null;
+        })
+                .addOnSuccessListener(aVoid -> Log.d(TAG, "Deposit success!"))
+                .addOnFailureListener(e -> Log.d(TAG, "Deposit failure", e));
+    }
+
+    public void withdrawal(int withdrawAmount) {
+        final DocumentReference docRef = db.collection("accounts").document(loggedInAccountId);
+
+        db
+                .runTransaction((Transaction.Function<Void>) transaction -> {
+                    DocumentSnapshot documentSnapshot = transaction.get(docRef);
+
+                    int balance = documentSnapshot.getLong("account_balance").intValue() - withdrawAmount;
+
+                    if (balance < 0) {
+                        return null;
+                    } else {
+                        transaction.update(docRef, "account_balance", balance);
+                    }
+
+                    return null;
+                })
+                .addOnSuccessListener(aVoid -> Log.d(TAG, "Withdraw success!"))
+                .addOnFailureListener(e -> Log.d(TAG, "Withdraw failure!", e));
+    }
+
+    public void transaction(String accountId, int transactionAmount) {
+        final DocumentReference docRef = db.collection("accounts").document(loggedInAccountId);
+
+    }
+
     public void fetchAccountBalance(BalanceListener callback) {
         db.collection("accounts")
                 .document(loggedInAccountId)
@@ -95,16 +141,11 @@ public class DatabaseController {
                 });
     }
 
-    public void deposit(DepositListener depositListener) {
-         db.collection("accounts").document(loggedInAccountId);
-    }
-
-
     public void addAccount(String accountId, int balance, int pinCode) {
         Map<String, Object> account = new HashMap<>();
         account.put("account_balance", balance);
         account.put("account_password", pinCode);
-       // account = new Account(accountId, balance, pinCode);
+        // account = new Account(accountId, balance, pinCode);
 
         db.collection("accounts").document(accountId)
                 .set(account)
