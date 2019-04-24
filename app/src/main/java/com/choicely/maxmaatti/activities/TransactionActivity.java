@@ -21,15 +21,11 @@ public class TransactionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transaction);
 
-        transactionButton = findViewById(R.id.transaction_button);
-        cardNumberText = findViewById(R.id.card_number);
-        amountText = findViewById(R.id.amount);
+        transactionButton = findViewById(R.id.activity_transaction_transfer_button);
+        cardNumberText = findViewById(R.id.activity_transaction_card_number_text);
+        amountText = findViewById(R.id.activity_transaction_amount_text);
 
-        transactionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
+        transactionButton.setOnClickListener(v -> DatabaseController.getInstance()
+                .transaction(cardNumberText.getText().toString(), Integer.parseInt(amountText.getText().toString())));
     }
 }
