@@ -15,6 +15,7 @@ public class TransactionActivity extends AppCompatActivity {
     private Button transactionButton;
     private EditText cardNumberText;
     private EditText amountText;
+    private EditText messageText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,8 +25,19 @@ public class TransactionActivity extends AppCompatActivity {
         transactionButton = findViewById(R.id.activity_transaction_transfer_button);
         cardNumberText = findViewById(R.id.activity_transaction_card_number_text);
         amountText = findViewById(R.id.activity_transaction_amount_text);
+        messageText = findViewById(R.id.activity_transaction_message_text);
 
-        transactionButton.setOnClickListener(v -> DatabaseController.getInstance()
-                .transaction(cardNumberText.getText().toString(), Integer.parseInt(amountText.getText().toString())));
+        transactionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DatabaseController.getInstance()
+                        .transaction(cardNumberText.getText().toString(), Integer.parseInt(amountText.getText().toString()), messageText.getText().toString());
+                cardNumberText.setText(null);
+                amountText.setText(null);
+                messageText.setText(null);
+            }
+        });
+
+
     }
 }

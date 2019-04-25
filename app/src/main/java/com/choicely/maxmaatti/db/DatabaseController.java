@@ -1,22 +1,23 @@
 package com.choicely.maxmaatti.db;
 
 import android.util.Log;
-
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Transaction;
-
 import org.w3c.dom.Document;
-
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
-
 import androidx.annotation.NonNull;
 
 public class DatabaseController {
@@ -84,7 +85,7 @@ public class DatabaseController {
                 });
     }
 
-    public void deposit(int depositAmount) {
+    public void deposit(final int depositAmount) {
         if (depositAmount < 0) {
             Log.w(TAG, "Tried to deposit negative amount");
             return;
@@ -92,7 +93,7 @@ public class DatabaseController {
         internalBalanceChange(depositAmount, new BalanceChangeListener() {
             @Override
             public void onSuccess(int balance) {
-
+                createEvent(loggedInAccountId, "deposit", depositAmount, null);
             }
 
             @Override
@@ -107,10 +108,11 @@ public class DatabaseController {
         if (withdrawAmount > 0) {
             withdrawAmount = -withdrawAmount;
         }
+        final int eventBalanceChange = withdrawAmount;
         internalBalanceChange(withdrawAmount, new BalanceChangeListener() {
             @Override
             public void onSuccess(int balance) {
-
+                createEvent(loggedInAccountId, "withdrawal", eventBalanceChange, null);
             }
 
             @Override
@@ -152,7 +154,7 @@ public class DatabaseController {
                 });
     }
 
-    public void transaction(String accountId, int transactionAmount) {
+    public void transaction(String accountId, int transactionAmount, String message) {
         final DocumentReference targetDocRef = db.collection("accounts").document(accountId);
 
         final DocumentReference myDocRef = db.collection("accounts").document(loggedInAccountId);
@@ -173,18 +175,21 @@ public class DatabaseController {
                     } else {
                         transaction.update(myDocRef, "account_balance", balance.get());
                         transaction.update(targetDocRef, "account_balance", targetBalance);
+
                     }
 
                     return null;
                 })
                 .addOnSuccessListener(aVoid -> {
                     Log.d(TAG, String.format("Balance change[%s] success!", transactionAmount));
+                    createEvent(accountId, "transaction", transactionAmount, message);
+                    createEvent(loggedInAccountId, "transaction", -transactionAmount, message);
                     //balanceChangeListener.onSuccess(balance.intValue());
                     // TODO: add listener, onSuccess(balance)
                 })
                 .addOnFailureListener(e -> {
                     Log.w(TAG, String.format("Balance change[%s] failed!", transactionAmount), e);
-                    //balanceChangeListener.onFailure();
+                    //balanceChangeListener.onFailure();te
                     // TODO: add listener, onFailure
 
                 });
@@ -208,9 +213,27 @@ public class DatabaseController {
                     }
                 });
     }
-    
 
-    public void addAccount(String accountId, int balance, int pinCode) {
+
+    public void createEvent(String accountId, String eventType, int balanceChange, String description) {
+        final CollectionReference collectionReference = db.collection("accounts");
+        Map<String, Object> event = new HashMap<>();
+
+        event.put("balance_change", balanceChange);
+        event.put("description", description);
+        event.put("event_time", FieldValue.serverTimestamp());
+        event.put("event_type", eventType);
+
+
+        collectionReference.document(accountId).collection("events")
+                .add(event)
+                .addOnSuccessListener(documentReference -> Log.d(TAG, "Event successfully created!"))
+                .addOnFailureListener(e -> Log.d(TAG, "Failed to create an event", e));
+
+    }
+
+
+    public void createAccount(String accountId, int balance, int pinCode) {
         Map<String, Object> account = new HashMap<>();
         account.put("account_balance", balance);
         account.put("account_password", pinCode);
