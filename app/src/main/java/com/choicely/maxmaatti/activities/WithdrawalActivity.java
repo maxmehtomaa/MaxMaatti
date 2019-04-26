@@ -35,6 +35,7 @@ public class WithdrawalActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_withdrawal);
 
+        setTitle("Withdrawal");
         context = getApplicationContext();
         duration = Toast.LENGTH_SHORT;
 

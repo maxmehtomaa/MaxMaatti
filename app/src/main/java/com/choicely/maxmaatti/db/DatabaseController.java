@@ -5,17 +5,23 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.Transaction;
 import org.w3c.dom.Document;
+
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 import androidx.annotation.NonNull;
@@ -48,6 +54,11 @@ public class DatabaseController {
 
     public interface BalanceListener {
         void onBalance(int balance);
+    }
+
+    public interface EventListener {
+        void event(AtmEvent event);
+        //void event(String eventType, int balanceChange, Date date, String description);
     }
 
     public static DatabaseController getInstance() {
@@ -230,6 +241,41 @@ public class DatabaseController {
                 .addOnSuccessListener(documentReference -> Log.d(TAG, "Event successfully created!"))
                 .addOnFailureListener(e -> Log.d(TAG, "Failed to create an event", e));
 
+    }
+
+    public void getEventsAsync(EventListener eventListener) {
+        final DocumentReference docRef = db.collection("accounts").document(loggedInAccountId);
+
+        docRef.collection("events").get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+
+                                Log.d(TAG, document.getId() + " => " + document.getData());
+
+                                AtmEvent e = document.toObject(AtmEvent.class);
+
+                                /*
+                                String eventType = document.getString("event_type");
+                                int balanceChange = document.getLong("balance_change").intValue();
+                                Date date = document.getDate("event_time");
+                                String description = document.getString("description");
+
+                                e.setEventType(eventType);
+                                e.setBalanceChange(balanceChange);
+                                e.setEventTime(date.toString());
+                                e.setDescription(description);
+*/
+                                eventListener.event(e);
+
+                            }
+                        } else {
+                            Log.d(TAG, "Error getting documents: " + task.getException());
+                        }
+                    }
+                });
     }
 
 

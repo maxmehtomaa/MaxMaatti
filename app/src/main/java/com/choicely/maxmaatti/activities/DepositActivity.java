@@ -26,6 +26,8 @@ public class DepositActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_deposit);
 
+        setTitle("Deposit");
+
         context = getApplicationContext();
         duration = Toast.LENGTH_SHORT;
 

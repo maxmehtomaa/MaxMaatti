@@ -22,6 +22,8 @@ public class TransactionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transaction);
 
+        setTitle("Transaction");
+
         transactionButton = findViewById(R.id.activity_transaction_transfer_button);
         cardNumberText = findViewById(R.id.activity_transaction_card_number_text);
         amountText = findViewById(R.id.activity_transaction_amount_text);
