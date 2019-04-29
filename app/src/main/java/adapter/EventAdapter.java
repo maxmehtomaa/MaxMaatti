@@ -1,5 +1,7 @@
 package adapter;
 
+import android.graphics.Color;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -11,6 +13,9 @@ import com.choicely.maxmaatti.R;
 import com.choicely.maxmaatti.db.AtmEvent;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+
+import java.text.Format;
+import java.text.SimpleDateFormat;
 
 public class EventAdapter extends FirestoreRecyclerAdapter<AtmEvent, EventAdapter.EventHolder> {
 
@@ -25,14 +30,28 @@ public class EventAdapter extends FirestoreRecyclerAdapter<AtmEvent, EventAdapte
     }
 
     @Override
-    protected void onBindViewHolder(@NonNull EventHolder eventHolder, int i, @NonNull AtmEvent atmEvent) {
+    protected void onBindViewHolder(@NonNull EventHolder holder, int i, @NonNull AtmEvent e) {
+        Format formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:SS");
 
+
+        holder.eventTypeText.setText(e.getEvent_type());
+        holder.balanceChangeText.setText(Integer.toString(e.getBalance_change()) + " €");
+        holder.descriptionText.setText(e.getDescription());
+        holder.dateText.setText(formatter.format(e.getEvent_time()));
+
+        if (e.getBalance_change() < 0) {
+            holder.balanceChangeText.setTextColor(Color.RED);
+        } else {
+            holder.balanceChangeText.setTextColor(Color.GREEN);
+        }
     }
+
 
     @NonNull
     @Override
     public EventHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return null;
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.event_list_row, parent, false);
+        return new EventHolder(v);
     }
 
     class EventHolder extends RecyclerView.ViewHolder {
@@ -43,10 +62,10 @@ public class EventAdapter extends FirestoreRecyclerAdapter<AtmEvent, EventAdapte
 
         public EventHolder(@NonNull View itemView) {
             super(itemView);
-            eventTypeText = itemView.findViewById(R.id.activity_account_events_event_type_text);
-            balanceChangeText = itemView.findViewById(R.id.activity_account_events_balance_change_text);
-            dateText = itemView.findViewById(R.id.activity_account_events_date_text);
-            descriptionText = itemView.findViewById(R.id.activity_account_events_message_text);
+            eventTypeText = itemView.findViewById(R.id.event_list_row_event_type_text);
+            balanceChangeText = itemView.findViewById(R.id.event_list_row_balance_change_text);
+            dateText = itemView.findViewById(R.id.event_list_row_date_text);
+            descriptionText = itemView.findViewById(R.id.event_list_row_message_text);
         }
     }
 }

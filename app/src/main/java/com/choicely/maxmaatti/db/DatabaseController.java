@@ -68,6 +68,10 @@ public class DatabaseController {
         return instance;
     }
 
+    public String getLoggedInAccountId() {
+        return loggedInAccountId;
+    }
+
     public void login(String accountId, String pinCode, OnLoginListener onLoginListener) {
         db.collection("accounts").document(accountId)
                 .get()

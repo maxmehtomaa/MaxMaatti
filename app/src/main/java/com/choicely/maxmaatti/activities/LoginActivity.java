@@ -9,6 +9,7 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.choicely.maxmaatti.db.DatabaseController;
 import com.choicely.maxmaatti.R;
@@ -49,6 +50,7 @@ public class LoginActivity extends AppCompatActivity {
                     Intent intent = new Intent(context, FeaturesActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     context.startActivity(intent);
+                    finish();
                 }
 
                 @Override
@@ -63,6 +65,11 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+    }
+
+    @Override
+    public void onBackPressed() {
+
     }
 }
 

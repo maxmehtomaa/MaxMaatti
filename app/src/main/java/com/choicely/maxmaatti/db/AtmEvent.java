@@ -6,7 +6,16 @@ public class AtmEvent {
 
     private String event_type;
     private int balance_change;
-//    private Date event_time;
+
+    public Date getEvent_time() {
+        return event_time;
+    }
+
+    public void setEvent_time(Date event_time) {
+        this.event_time = event_time;
+    }
+
+    private Date event_time;
     private String description;
 
     public String getEvent_type() {

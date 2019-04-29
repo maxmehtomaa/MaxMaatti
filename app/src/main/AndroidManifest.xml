@@ -17,18 +17,23 @@
 
         <activity
             android:name=".activities.AccountEventsActivity"
+            android:parentActivityName=".activities.FeaturesActivity"
             android:launchMode="singleTop" />
         <activity
             android:name=".activities.BalanceActivity"
+            android:parentActivityName=".activities.FeaturesActivity"
             android:launchMode="singleTop" />
         <activity
             android:name=".activities.TransactionActivity"
+            android:parentActivityName=".activities.FeaturesActivity"
             android:launchMode="singleTop" />
         <activity
             android:name=".activities.DepositActivity"
+            android:parentActivityName=".activities.FeaturesActivity"
             android:launchMode="singleTop" />
         <activity
             android:name=".activities.WithdrawalActivity"
+            android:parentActivityName=".activities.FeaturesActivity"
             android:launchMode="singleTop" />
         <activity
             android:name=".activities.FeaturesActivity"
