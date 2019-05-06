@@ -4,20 +4,18 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.provider.ContactsContract;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.choicely.maxmaatti.db.DatabaseController;
-import com.choicely.maxmaatti.model.Account;
 import com.choicely.maxmaatti.R;
 
-
+/**
+ * This is a user interface for withdrawal functionality
+ */
 public class WithdrawalActivity extends AppCompatActivity {
 
-    private Account account;
     private Button withdraw20Button;
     private Button withdraw40Button;
     private Button withdraw60Button;
@@ -25,10 +23,11 @@ public class WithdrawalActivity extends AppCompatActivity {
     private Button withdraw140Button;
     private Button withdraw200Button;
     private Button withdrawOptionalButton;
-    private Toast toast;
     private Context context;
     private int duration;
     private EditText withdrawOptionalField;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,11 +48,15 @@ public class WithdrawalActivity extends AppCompatActivity {
 
         withdrawOptionalField = findViewById(R.id.withdraw_optional_field);
 
+        /*
+         * Buttons for withdraw
+         */
         withdraw20Button.setOnClickListener(v -> {
             CharSequence text = "You withdraw'd 20 euros";
             Toast.makeText(context, text, duration).show();
             DatabaseController.getInstance().withdrawal(20);
         });
+
 
         withdraw40Button.setOnClickListener(v -> {
             CharSequence text = "You withdraw'd 40 euros!";
@@ -103,5 +106,12 @@ public class WithdrawalActivity extends AppCompatActivity {
             CharSequence error = "You dont have enough money to withdraw!";
 
         });
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+
     }
 }

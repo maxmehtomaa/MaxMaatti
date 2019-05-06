@@ -1,5 +1,8 @@
 package com.choicely.maxmaatti.model;
 
+/**
+ * This is a model class for accounts
+ */
 public class Account {
 
     private String accountId;

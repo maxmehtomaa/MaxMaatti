@@ -18,8 +18,9 @@
         android:layout_marginLeft="0dp"
         android:layout_marginTop="0dp"
         android:text="Welcome!"
+        android:fontFamily="@font/arial"
         android:textAlignment="center"
-        android:textSize="20sp" />
+        android:textSize="40sp" />
 
     <TextView
         android:id="@+id/textView2"
@@ -32,25 +33,26 @@
         android:layout_marginStart="0dp"
         android:layout_marginLeft="0dp"
         android:layout_marginTop="94dp"
+        android:fontFamily="@font/arial"
         android:text="Choose your operation below"
-        android:textSize="20sp" />
+        android:textSize="30sp" />
 
     <Button
-
         android:id="@+id/withdraw_button"
         android:layout_width="187dp"
         android:layout_height="75dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="0dp"
-        android:layout_marginRight="0dp"
-        android:layout_marginBottom="167dp"
+        android:layout_marginEnd="-2dp"
+        android:layout_marginRight="-2dp"
+        android:layout_marginBottom="142dp"
         android:baselineAligned="false"
+        android:drawableBottom="@drawable/ic_euro_symbol"
+        android:fontFamily="@font/arial"
         android:text="Withdrawal" />
 
     <Button
-
         android:id="@+id/deposit_button"
         android:layout_width="187dp"
         android:layout_height="75dp"
@@ -61,44 +63,48 @@
         android:layout_marginLeft="224dp"
         android:layout_marginTop="270dp"
         android:baselineAligned="false"
-        android:text="Deposit" />
+        android:fontFamily="@font/arial"
+        android:text="Deposit"
+        android:drawableBottom="@drawable/ic_save"/>
 
     <Button
-
         android:id="@+id/transaction_button"
         android:layout_width="187dp"
         android:layout_height="75dp"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="257dp"
         android:baselineAligned="false"
-        android:text="Transaction" />
+        android:fontFamily="@font/arial"
+        android:text="Transaction"
+        android:drawableBottom="@drawable/ic_import_export"/>
 
     <Button
-
         android:id="@+id/acc_events_button"
         android:layout_width="187dp"
         android:layout_height="75dp"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="0dp"
         android:baselineAligned="false"
-        android:text="Account Events" />
+        android:fontFamily="@font/arial"
+        android:text="Account Events"
+        android:drawableBottom="@drawable/ic_account_box"/>
 
     <Button
-
         android:id="@+id/balance_button"
         android:layout_width="187dp"
         android:layout_height="75dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="224dp"
-        android:layout_marginRight="224dp"
-        android:layout_marginBottom="167dp"
+        android:layout_marginEnd="226dp"
+        android:layout_marginRight="226dp"
+        android:layout_marginBottom="139dp"
         android:baselineAligned="false"
+        android:drawableBottom="@drawable/ic_account_balance_wallet"
+        android:fontFamily="@font/arial"
         android:text="Balance" />
 
     <Button
-
         android:id="@+id/logout_button"
         android:layout_width="187dp"
         android:layout_height="75dp"
@@ -108,10 +114,11 @@
         android:layout_marginEnd="0dp"
         android:layout_marginRight="0dp"
         android:layout_marginBottom="0dp"
-        android:text="LOGOUT" />
+        android:fontFamily="@font/arial"
+        android:text="LOGOUT"
+        android:drawableBottom="@drawable/ic_logout"/>
 
     <ImageView
-
         android:id="@+id/imageView"
         android:layout_width="91dp"
         android:layout_height="75dp"

@@ -4,12 +4,17 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.choicely.maxmaatti.R;
 import com.choicely.maxmaatti.db.DatabaseController;
 
+/**
+ * This is a user interface for transaction functionality
+ */
 public class TransactionActivity extends AppCompatActivity {
 
     private Button transactionButton;
@@ -29,17 +34,26 @@ public class TransactionActivity extends AppCompatActivity {
         amountText = findViewById(R.id.activity_transaction_amount_text);
         messageText = findViewById(R.id.activity_transaction_message_text);
 
-        transactionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DatabaseController.getInstance()
-                        .transaction(cardNumberText.getText().toString(), Integer.parseInt(amountText.getText().toString()), messageText.getText().toString());
-                cardNumberText.setText(null);
-                amountText.setText(null);
-                messageText.setText(null);
-            }
+        /*
+        Button for transaction
+         */
+        transactionButton.setOnClickListener(v -> {
+            DatabaseController.getInstance()
+                    .transaction(cardNumberText.getText().toString(), Integer.parseInt(amountText.getText().toString()), messageText.getText().toString());
+            CharSequence text = "Money successfully transferred!";
+            Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT).show();
+            cardNumberText.setText(null);
+            amountText.setText(null);
+            messageText.setText(null);
         });
 
+
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
 
     }
 }

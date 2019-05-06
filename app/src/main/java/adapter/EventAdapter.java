@@ -10,12 +10,16 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.choicely.maxmaatti.R;
-import com.choicely.maxmaatti.db.AtmEvent;
+import com.choicely.maxmaatti.model.AtmEvent;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 
 import java.text.Format;
 import java.text.SimpleDateFormat;
+
+/**
+ * This is an adapter for events
+ */
 
 public class EventAdapter extends FirestoreRecyclerAdapter<AtmEvent, EventAdapter.EventHolder> {
 
@@ -38,6 +42,8 @@ public class EventAdapter extends FirestoreRecyclerAdapter<AtmEvent, EventAdapte
         holder.balanceChangeText.setText(Integer.toString(e.getBalance_change()) + " €");
         holder.descriptionText.setText(e.getDescription());
         holder.dateText.setText(formatter.format(e.getEvent_time()));
+
+
 
         if (e.getBalance_change() < 0) {
             holder.balanceChangeText.setTextColor(Color.RED);

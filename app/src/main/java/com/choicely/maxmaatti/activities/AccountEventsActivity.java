@@ -1,38 +1,31 @@
 package com.choicely.maxmaatti.activities;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.util.EventLog;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.choicely.maxmaatti.R;
-import com.choicely.maxmaatti.db.AtmEvent;
+import com.choicely.maxmaatti.model.AtmEvent;
 import com.choicely.maxmaatti.db.DatabaseController;
-import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
-import java.text.SimpleDateFormat;
-
 import adapter.EventAdapter;
 
+/**
+ * User interface for account events.
+ * Uses RecyclerView to show events in a list.
+ */
 public class AccountEventsActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private EventAdapter adapter;
 
-
     private FirebaseFirestore db;
-    private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +39,9 @@ public class AccountEventsActivity extends AppCompatActivity {
         setupRecyclerView();
     }
 
+    /**
+     * Starts listening to database changes
+     */
     @Override
     protected void onStart() {
         super.onStart();
@@ -55,6 +51,9 @@ public class AccountEventsActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Stops listening to database changes
+     */
     @Override
     protected void onStop() {
         super.onStop();
@@ -64,7 +63,9 @@ public class AccountEventsActivity extends AppCompatActivity {
         }
     }
 
-
+    /**
+     * Setups RecyclerView for this activity
+     */
     private void setupRecyclerView() {
         final DocumentReference docRef = db.collection("accounts").document(DatabaseController.getInstance().getLoggedInAccountId());
 
@@ -80,5 +81,12 @@ public class AccountEventsActivity extends AppCompatActivity {
 
         adapter = new EventAdapter(options);
         recyclerView.setAdapter(adapter);
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+
     }
 }

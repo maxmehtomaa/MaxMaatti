@@ -1,11 +1,10 @@
 package com.choicely.maxmaatti.db;
 
 import android.util.Log;
+
+import com.choicely.maxmaatti.model.AtmEvent;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -14,17 +13,16 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.Transaction;
-import org.w3c.dom.Document;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 import androidx.annotation.NonNull;
+
+/**
+ * This is a helper class for database operations.
+ *
+ */
 
 public class DatabaseController {
 
@@ -61,6 +59,10 @@ public class DatabaseController {
         //void event(String eventType, int balanceChange, Date date, String description);
     }
 
+    /**
+     * Returns a instance of database
+     * @return
+     */
     public static DatabaseController getInstance() {
         if (instance == null) {
             instance = new DatabaseController();
@@ -68,10 +70,20 @@ public class DatabaseController {
         return instance;
     }
 
+    /**
+     * Returns logged in account
+     * @return
+     */
     public String getLoggedInAccountId() {
         return loggedInAccountId;
     }
 
+    /**
+     * Login functionality
+     * @param accountId
+     * @param pinCode
+     * @param onLoginListener
+     */
     public void login(String accountId, String pinCode, OnLoginListener onLoginListener) {
         db.collection("accounts").document(accountId)
                 .get()
@@ -100,6 +112,10 @@ public class DatabaseController {
                 });
     }
 
+    /**
+     * Deposit functionality
+     * @param depositAmount
+     */
     public void deposit(final int depositAmount) {
         if (depositAmount < 0) {
             Log.w(TAG, "Tried to deposit negative amount");
@@ -118,7 +134,10 @@ public class DatabaseController {
         });
     }
 
-
+    /**
+     * Withdrawal functionality
+     * @param withdrawAmount
+     */
     public void withdrawal(int withdrawAmount) {
         if (withdrawAmount > 0) {
             withdrawAmount = -withdrawAmount;
@@ -137,6 +156,11 @@ public class DatabaseController {
         });
     }
 
+    /**
+     * Changes the balance
+     * @param amount
+     * @param balanceChangeListener
+     */
     private void internalBalanceChange(int amount, BalanceChangeListener balanceChangeListener) {
         final DocumentReference docRef = db.collection("accounts").document(loggedInAccountId);
         AtomicInteger balance = new AtomicInteger();
@@ -169,6 +193,12 @@ public class DatabaseController {
                 });
     }
 
+    /**
+     * Transaction functionality
+     * @param accountId
+     * @param transactionAmount
+     * @param message
+     */
     public void transaction(String accountId, int transactionAmount, String message) {
         final DocumentReference targetDocRef = db.collection("accounts").document(accountId);
 
@@ -210,7 +240,10 @@ public class DatabaseController {
                 });
     }
 
-
+    /**
+     * Fetches the account balance from database
+     * @param callback
+     */
     public void fetchAccountBalance(BalanceListener callback) {
         db.collection("accounts")
                 .document(loggedInAccountId)
@@ -229,7 +262,13 @@ public class DatabaseController {
                 });
     }
 
-
+    /**
+     * Creates a event
+     * @param accountId
+     * @param eventType
+     * @param balanceChange
+     * @param description
+     */
     public void createEvent(String accountId, String eventType, int balanceChange, String description) {
         final CollectionReference collectionReference = db.collection("accounts");
         Map<String, Object> event = new HashMap<>();
@@ -282,6 +321,12 @@ public class DatabaseController {
                 });
     }
 
+    /**
+     * Creates a account
+     * @param accountId
+     * @param balance
+     * @param pinCode
+     */
 
     public void createAccount(String accountId, int balance, int pinCode) {
         Map<String, Object> account = new HashMap<>();

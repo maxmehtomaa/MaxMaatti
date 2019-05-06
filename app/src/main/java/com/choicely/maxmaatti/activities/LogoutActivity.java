@@ -5,11 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 
 import com.choicely.maxmaatti.R;
 
+/**
+ * This is a user interface for logout functionality
+ */
 public class LogoutActivity extends AppCompatActivity {
 
     private Button yesButton;
@@ -32,6 +34,13 @@ public class LogoutActivity extends AppCompatActivity {
         });
 
         noButton.setOnClickListener(v -> finish());
+
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
 
     }
 }

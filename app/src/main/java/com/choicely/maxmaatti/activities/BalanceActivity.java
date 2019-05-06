@@ -6,11 +6,13 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import com.choicely.maxmaatti.db.DatabaseController;
-import com.choicely.maxmaatti.model.Account;
 import com.choicely.maxmaatti.R;
 
 import java.util.Locale;
 
+/**
+ * This is a user interface for checking balance
+ */
 public class BalanceActivity extends AppCompatActivity {
 
     private TextView balanceView;
@@ -24,9 +26,19 @@ public class BalanceActivity extends AppCompatActivity {
         showBalance();
     }
 
+    /**
+     * Shows balance in TextView
+     */
     public void showBalance() {
         DatabaseController.getInstance().fetchAccountBalance(balance -> {
             balanceView.setText(String.format(Locale.ENGLISH, "%d€", balance));
         });
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+
     }
 }

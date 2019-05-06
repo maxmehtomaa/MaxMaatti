@@ -11,10 +11,13 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.choicely.maxmaatti.db.DatabaseController;
-import com.choicely.maxmaatti.model.Account;
 import com.choicely.maxmaatti.R;
 
 public class DepositActivity extends AppCompatActivity {
+
+    /**
+     * This is a user interface for deposit
+     */
 
     private EditText depositAmountText;
     private Button depositButton;
@@ -34,6 +37,9 @@ public class DepositActivity extends AppCompatActivity {
         depositAmountText = findViewById(R.id.deposit_amount);
         depositButton = findViewById(R.id.deposit_button);
 
+        /**
+         * If deposit amount is less than zero, program doesn't deposit.
+         */
         depositButton.setOnClickListener(v -> {
             int number = Integer.parseInt(depositAmountText.getText().toString());
             if (number < 0) {
@@ -49,5 +55,12 @@ public class DepositActivity extends AppCompatActivity {
                 depositAmountText.setText(null);
             }
         });
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+
     }
 }

@@ -1,7 +1,11 @@
-package com.choicely.maxmaatti.db;
+package com.choicely.maxmaatti.model;
 
 import java.util.Date;
 
+/**
+ * This is a model class for account events
+ *
+ */
 public class AtmEvent {
 
     private String event_type;
