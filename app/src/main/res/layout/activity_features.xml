@@ -44,9 +44,9 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="-2dp"
-        android:layout_marginRight="-2dp"
-        android:layout_marginBottom="142dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="120dp"
         android:baselineAligned="false"
         android:drawableBottom="@drawable/ic_euro_symbol"
         android:fontFamily="@font/arial"
@@ -59,35 +59,41 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="224dp"
-        android:layout_marginLeft="224dp"
-        android:layout_marginTop="270dp"
+        android:layout_marginStart="211dp"
+        android:layout_marginLeft="211dp"
+        android:layout_marginTop="300dp"
         android:baselineAligned="false"
+        android:drawableBottom="@drawable/ic_save"
         android:fontFamily="@font/arial"
-        android:text="Deposit"
-        android:drawableBottom="@drawable/ic_save"/>
+        android:text="Deposit" />
 
     <Button
         android:id="@+id/transaction_button"
         android:layout_width="187dp"
         android:layout_height="75dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="257dp"
+        android:layout_marginStart="11dp"
+        android:layout_marginLeft="11dp"
+        android:layout_marginBottom="228dp"
         android:baselineAligned="false"
+        android:drawableBottom="@drawable/ic_import_export"
         android:fontFamily="@font/arial"
-        android:text="Transaction"
-        android:drawableBottom="@drawable/ic_import_export"/>
+        android:text="Transaction" />
 
     <Button
         android:id="@+id/acc_events_button"
         android:layout_width="187dp"
         android:layout_height="75dp"
+        android:layout_alignStart="@+id/transaction_button"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="0dp"
+        android:layout_marginStart="-3dp"
+        android:layout_marginBottom="9dp"
         android:baselineAligned="false"
+        android:drawableBottom="@drawable/ic_account_box"
         android:fontFamily="@font/arial"
-        android:text="Account Events"
-        android:drawableBottom="@drawable/ic_account_box"/>
+        android:text="Account Events" />
 
     <Button
         android:id="@+id/balance_button"
@@ -96,9 +102,9 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="226dp"
-        android:layout_marginRight="226dp"
-        android:layout_marginBottom="139dp"
+        android:layout_marginEnd="218dp"
+        android:layout_marginRight="218dp"
+        android:layout_marginBottom="117dp"
         android:baselineAligned="false"
         android:drawableBottom="@drawable/ic_account_balance_wallet"
         android:fontFamily="@font/arial"
@@ -111,12 +117,12 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="0dp"
-        android:layout_marginRight="0dp"
-        android:layout_marginBottom="0dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:drawableBottom="@drawable/ic_logout"
         android:fontFamily="@font/arial"
-        android:text="LOGOUT"
-        android:drawableBottom="@drawable/ic_logout"/>
+        android:text="LOGOUT" />
 
     <ImageView
         android:id="@+id/imageView"
@@ -125,9 +131,9 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="173dp"
-        android:layout_marginEnd="160dp"
-        android:layout_marginRight="160dp"
+        android:layout_marginTop="186dp"
+        android:layout_marginEnd="164dp"
+        android:layout_marginRight="164dp"
         app:srcCompat="@drawable/ic_arrow_downward" />
 
 

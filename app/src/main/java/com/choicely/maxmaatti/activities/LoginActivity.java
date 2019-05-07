@@ -50,6 +50,7 @@ public class LoginActivity extends AppCompatActivity {
         pinCodeText = findViewById(R.id.pin_code_field);
         loginFailed = findViewById(R.id.login_failed);
 
+
         bottomAnimation = AnimationUtils.loadAnimation(LoginActivity.this, R.anim.frombottom);
         topAnimation = AnimationUtils.loadAnimation(LoginActivity.this, R.anim.fromtop);
 
@@ -88,6 +89,7 @@ public class LoginActivity extends AppCompatActivity {
         Intent intent = new Intent(context, FeaturesActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);
+        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
         finish();
     }
 

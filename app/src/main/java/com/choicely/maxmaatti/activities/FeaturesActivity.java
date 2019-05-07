@@ -28,7 +28,6 @@ public class FeaturesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_features);
 
-
         withdrawButton = findViewById(R.id.withdraw_button);
         depositButton = findViewById(R.id.deposit_button);
         transactionButton = findViewById(R.id.transaction_button);
@@ -101,4 +100,5 @@ public class FeaturesActivity extends AppCompatActivity {
 
         });
     }
+
 }
