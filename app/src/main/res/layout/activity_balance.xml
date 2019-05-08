@@ -17,7 +17,7 @@
         android:layout_marginStart="0dp"
         android:layout_marginLeft="0dp"
         android:layout_marginTop="0dp"
-        android:text="Your balance is: "
+        android:text="@string/balance_text"
         android:textSize="30sp"
         android:fontFamily="@font/arial"/>
 

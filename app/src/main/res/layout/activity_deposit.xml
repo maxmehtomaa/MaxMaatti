@@ -10,29 +10,22 @@
         android:id="@+id/deposit_amount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="96dp"
-        android:layout_marginLeft="96dp"
         android:layout_marginBottom="353dp"
+        android:layout_centerHorizontal="true"
         android:ems="10"
-        android:hint="Enter amount: "
-        android:inputType="number"
-        tools:layout_editor_absoluteX="84dp"
-        tools:layout_editor_absoluteY="211dp" />
+        android:hint="@string/deposit_amount_hint"
+        android:fontFamily="@font/arial"
+        android:inputType="number" />
 
     <TextView
         android:id="@+id/textView5"
         android:layout_width="match_parent"
         android:layout_height="63dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginLeft="0dp"
         android:layout_marginTop="86dp"
-        android:text="How much would you like to deposit?"
+        android:layout_centerHorizontal="true"
+        android:text="@string/deposit_text"
         android:textAlignment="center"
         android:textSize="20sp"
         android:fontFamily="@font/arial"
@@ -47,22 +40,19 @@
         android:layout_height="65dp"
         android:layout_alignParentTop="true"
         android:layout_marginTop="0dp"
-        android:text="Deposit"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        android:fontFamily="@font/arial"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_centerHorizontal="true"
+        android:text="@string/deposit_text_header"
+        android:fontFamily="@font/arial" />
+
 
     <Button
         android:id="@+id/deposit_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="154dp"
-        android:layout_marginLeft="154dp"
         android:layout_marginBottom="225dp"
-        android:text="Deposit" />
+        android:layout_centerHorizontal="true"
+        android:fontFamily="@font/arial"
+        android:text="@string/deposit_button" />
+
 </RelativeLayout>

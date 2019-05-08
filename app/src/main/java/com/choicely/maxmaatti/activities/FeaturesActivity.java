@@ -97,7 +97,6 @@ public class FeaturesActivity extends AppCompatActivity {
             Intent intent = new Intent(context, LogoutActivity.class);
             context.startActivity(intent);
             overridePendingTransition(R.anim.fadein, R.anim.fadeout);
-
         });
     }
 

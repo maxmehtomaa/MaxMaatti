@@ -12,26 +12,19 @@
         android:id="@+id/textView3"
         android:layout_width="match_parent"
         android:layout_height="77dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginLeft="0dp"
-        android:layout_marginTop="0dp"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="@font/arial"
         android:text="@string/withdrawal_title" />
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="match_parent"
         android:layout_height="58dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginLeft="0dp"
-        android:layout_marginTop="116dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="70dp"
         android:text="@string/withdrawal_text"
         android:textAlignment="center"
+        android:fontFamily="@font/arial"
         android:textSize="20sp" />
 
 
@@ -39,111 +32,84 @@
         android:id="@+id/withdraw20_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginLeft="0dp"
-        android:layout_marginTop="196dp"
-        android:text="20 €" />
+        android:layout_marginTop="150dp"
+        android:fontFamily="@font/arial"
+        android:text="@string/withdraw_20" />
 
     <Button
         android:id="@+id/withdraw40_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginLeft="0dp"
-        android:layout_marginBottom="295dp"
-        android:text="40 €" />
+        android:layout_marginTop="200dp"
+        android:fontFamily="@font/arial"
+        android:text="@string/withdraw_40" />
 
     <Button
         android:id="@+id/withdraw60_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginLeft="0dp"
-        android:layout_marginBottom="225dp"
-        android:text="60 €" />
+        android:layout_marginTop="250dp"
+        android:fontFamily="@font/arial"
+        android:text="@string/withdraw_60" />
 
     <Button
         android:id="@+id/withdraw100_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="191dp"
-        android:layout_marginEnd="0dp"
-        android:layout_marginRight="0dp"
-        android:text="100 €" />
+        android:layout_marginTop="150dp"
+        android:fontFamily="@font/arial"
+        android:text="@string/withdraw_100" />
 
     <Button
         android:id="@+id/withdraw140_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="0dp"
-        android:layout_marginRight="0dp"
-        android:layout_marginBottom="295dp"
-        android:text="140 €" />
+        android:layout_marginTop="200dp"
+        android:fontFamily="@font/arial"
+        android:text="@string/withdraw_140" />
 
     <Button
         android:id="@+id/withdraw200_button"
         android:layout_width="wrap_content"
+        android:fontFamily="@font/arial"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
+        android:layout_marginTop="250dp"
         android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="0dp"
-        android:layout_marginRight="0dp"
-        android:layout_marginBottom="226dp"
-        android:text="200 €" />
+        android:text="@string/withdraw_200" />
 
     <EditText
         android:id="@+id/withdraw_optional_field"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="95dp"
-        android:layout_marginLeft="95dp"
         android:layout_marginBottom="104dp"
+        android:layout_centerHorizontal="true"
         android:ems="10"
-        android:hint="Enter amount: "
+        android:fontFamily="@font/arial"
+        android:hint="@string/withdraw_optional_field_hint"
         android:inputType="number" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="109dp"
-        android:layout_marginLeft="109dp"
         android:layout_marginBottom="190dp"
-        android:text="Optional amount: "
+        android:fontFamily="@font/arial"
+        android:layout_centerHorizontal="true"
+        android:text="@string/withdraw_optional_text"
         android:textSize="20sp" />
 
     <Button
         android:id="@+id/withdraw_optional_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="138dp"
-        android:layout_marginLeft="138dp"
+        android:layout_centerHorizontal="true"
         android:layout_marginBottom="32dp"
-        android:text="Withdraw" />
+        android:fontFamily="@font/arial"
+        android:text="@string/withdraw_optional_button" />
 
 </RelativeLayout>

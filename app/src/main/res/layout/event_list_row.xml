@@ -5,44 +5,41 @@
     android:layout_height="wrap_content">
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="8dp"
-        android:background="@drawable/event_border">
-
-        <TextView
-            android:id="@+id/event_list_row_event_type_text"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:text="Withdrawal"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+            android:orientation="vertical"
+            android:padding="8dp"
+            android:background="@drawable/event_border">
+
+            <TextView
+                android:id="@+id/event_list_row_event_type_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:text="@string/event_type"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+            <TextView
+                android:id="@+id/event_list_row_balance_change_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:text="@string/balance_change" />
+
+            <TextView
+                    android:id="@+id/event_list_row_date_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/event_time" />
+
+                <TextView
+                    android:id="@+id/event_list_row_message_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/event_description" />
 
 
-        <TextView
-            android:id="@+id/event_list_row_balance_change_text"
-            android:layout_marginStart="300dp"
-            android:layout_marginLeft="300dp"
-            android:layout_marginTop="-26dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:text="20" />
+            </LinearLayout>
 
-        <TextView
-            android:id="@+id/event_list_row_date_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Date" />
-
-        <TextView
-            android:id="@+id/event_list_row_message_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Description" />
-
-    </LinearLayout>
-
-</LinearLayout>
+        </LinearLayout>
