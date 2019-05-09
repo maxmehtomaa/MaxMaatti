@@ -86,6 +86,6 @@ public class AccountEventsActivity extends AppCompatActivity {
     @Override
     public void finish() {
         super.finish();
-        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+        overridePendingTransition(R.anim.fadein, R.anim.slide_right_to_left);
     }
 }

@@ -17,7 +17,7 @@
     <string name="withdraw_140">140€</string>
     <string name="withdraw_200">200€</string>
 
-    <string name="withdraw_optional_field_hint">Enter amount:</string>
+    <string name="withdraw_optional_field_hint"><i>Enter amount:</i></string>
     <string name="withdraw_optional_text">Optional amount: </string>
 
     <string name="withdraw_optional_button">Withdraw</string>
@@ -25,7 +25,7 @@
     <string name="balance_text">Your balance is: </string>
 
     <string name="deposit_text">How much would you like to deposit?</string>
-    <string name="deposit_amount_hint">Enter amount: </string>
+    <string name="deposit_amount_hint"><i>Enter amount: </i></string>
     <string name="deposit_text_header">Deposit</string>
     <string name="deposit_button">Deposit</string>
 
@@ -36,10 +36,17 @@
 
     <string name="transaction_text_header">Transaction</string>
     <string name="transaction_text_receiver">Enter account you want to transfer to:</string>
-    <string name="transaction_text_receiver_hint">Account: </string>
+    <string name="transaction_text_receiver_hint"><i>Card number: </i></string>
     <string name="transaction_text_amount">Enter amount you want to transfer:</string>
-    <string name="transaction_text_amount_hint">Amount: </string>
-    <string name="transaction_text_message_hint">Message:</string>
+    <string name="transaction_text_amount_hint"><i>Amount: </i></string>
+    <string name="transaction_text_message_hint"><i>(Optional) Message: </i></string>
     <string name="transaction_button">Transfer</string>
+
+    <string name="login_text_hint"><i>Card number</i></string>
+    <string name="login_pin_hint"><i>PIN code</i></string>
+
+    <string name="about_creator">Max Mehtomaa</string>
+    <string name="about_name">MaxMaatti</string>
+
 
 </resources>

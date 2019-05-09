@@ -3,6 +3,7 @@ package com.choicely.maxmaatti.activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
@@ -11,6 +12,8 @@ import android.widget.Toast;
 
 import com.choicely.maxmaatti.R;
 import com.choicely.maxmaatti.db.DatabaseController;
+
+import org.w3c.dom.Text;
 
 /**
  * This is a user interface for transaction functionality
@@ -38,22 +41,29 @@ public class TransactionActivity extends AppCompatActivity {
         Button for transaction
          */
         transactionButton.setOnClickListener(v -> {
-            DatabaseController.getInstance()
-                    .transaction(cardNumberText.getText().toString(), Integer.parseInt(amountText.getText().toString()), messageText.getText().toString());
-            CharSequence text = "Money successfully transferred!";
-            Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT).show();
-            cardNumberText.setText(null);
-            amountText.setText(null);
-            messageText.setText(null);
+            final String cardNumber = cardNumberText.getText().toString();
+            final String amount = amountText.getText().toString();
+
+            if (!TextUtils.isEmpty(cardNumber) && !TextUtils.isEmpty(amount)) {
+
+                DatabaseController.getInstance()
+                        .transaction(cardNumberText.getText().toString(), Integer.parseInt(amountText.getText().toString()), messageText.getText().toString());
+                CharSequence text = "Money successfully transferred!";
+                Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT).show();
+                cardNumberText.setText(null);
+                amountText.setText(null);
+                messageText.setText(null);
+            } else {
+                CharSequence text = "Enter the card number and amount";
+                Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
+            }
         });
-
-
     }
 
     @Override
     public void finish() {
         super.finish();
-        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+        overridePendingTransition(R.anim.fadein, R.anim.slide_right_to_left);
 
     }
 }

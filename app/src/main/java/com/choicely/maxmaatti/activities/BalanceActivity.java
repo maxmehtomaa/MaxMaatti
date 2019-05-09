@@ -2,7 +2,11 @@ package com.choicely.maxmaatti.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.animation.Animator;
+import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
+import android.view.ViewAnimationUtils;
 import android.widget.TextView;
 
 import com.choicely.maxmaatti.db.DatabaseController;
@@ -38,6 +42,6 @@ public class BalanceActivity extends AppCompatActivity {
     @Override
     public void finish() {
         super.finish();
-        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+        overridePendingTransition(R.anim.fadein, R.anim.slide_right_to_left);
     }
 }

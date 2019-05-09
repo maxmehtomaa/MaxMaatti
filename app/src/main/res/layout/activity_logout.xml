@@ -25,7 +25,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_marginBottom="200dp"
-        android:layout_marginLeft="100dp"
+        android:layout_marginLeft="80dp"
         android:text="@string/logout_yes_button"
         android:fontFamily="@font/arial"/>
 
@@ -36,7 +36,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_marginBottom="200dp"
-        android:layout_marginRight="100dp"
+        android:layout_marginRight="80dp"
         android:text="@string/logout_no_button"
         android:fontFamily="@font/arial"/>
 

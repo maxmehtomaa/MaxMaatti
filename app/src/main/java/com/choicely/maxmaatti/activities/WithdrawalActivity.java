@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -28,7 +29,6 @@ public class WithdrawalActivity extends AppCompatActivity {
     private EditText withdrawOptionalField;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +45,6 @@ public class WithdrawalActivity extends AppCompatActivity {
         withdraw140Button = findViewById(R.id.withdraw140_button);
         withdraw200Button = findViewById(R.id.withdraw200_button);
         withdrawOptionalButton = findViewById(R.id.withdraw_optional_button);
-
         withdrawOptionalField = findViewById(R.id.withdraw_optional_field);
 
         /*
@@ -62,14 +61,12 @@ public class WithdrawalActivity extends AppCompatActivity {
             CharSequence text = "You withdraw'd 40 euros!";
             Toast.makeText(context, text, duration).show();
             DatabaseController.getInstance().withdrawal(40);
-
         });
 
         withdraw60Button.setOnClickListener(v -> {
             CharSequence text = "You withdraw'd 60 euros!";
             Toast.makeText(context, text, duration).show();
             DatabaseController.getInstance().withdrawal(60);
-
         });
 
         withdraw100Button.setOnClickListener(v -> {
@@ -88,30 +85,37 @@ public class WithdrawalActivity extends AppCompatActivity {
             CharSequence text = "You withdraw'd 200 euros!";
             Toast.makeText(context, text, duration).show();
             DatabaseController.getInstance().withdrawal(200);
-
         });
 
         withdrawOptionalButton.setOnClickListener(v -> {
-            int number = Integer.parseInt(withdrawOptionalField.getText().toString());
+            final String withdrawAmount = withdrawOptionalField.getText().toString();
 
-            if (number <= 0) {
-                CharSequence negativeValue = "Negative withdraw amount!";
-                Toast.makeText(context, negativeValue, duration).show();
+
+            if (!TextUtils.isEmpty(withdrawAmount)) {
+                int number = Integer.parseInt(withdrawAmount);
+
+                if (number <= 0) {
+                    CharSequence negativeValue = "Negative withdraw amount!";
+                    Toast.makeText(context, negativeValue, duration).show();
+                } else {
+                    CharSequence text = "You withdrawed " + number + " euros!";
+                    DatabaseController.getInstance().withdrawal(number);
+                    Toast.makeText(context, text, duration).show();
+                    withdrawOptionalField.setText(null);
+                }
+                CharSequence error = "You dont have enough money to withdraw!";
+
             } else {
-                CharSequence text = "You withdrawed " + number + " euros!";
-                DatabaseController.getInstance().withdrawal(number);
-                Toast.makeText(context, text, duration).show();
-                withdrawOptionalField.setText(null);
+                CharSequence text = "Enter the amount you want to withdraw!";
+                Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
             }
-            CharSequence error = "You dont have enough money to withdraw!";
-
         });
+
     }
 
     @Override
     public void finish() {
         super.finish();
-        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
-
+        overridePendingTransition(R.anim.fadein, R.anim.slide_right_to_left);
     }
 }

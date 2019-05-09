@@ -57,7 +57,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="283dp"
+        android:layout_marginBottom="260dp"
         android:layout_centerHorizontal="true"
         android:ems="10"
         android:hint="@string/transaction_text_amount_hint"
@@ -69,19 +69,18 @@
         android:layout_width="match_parent"
         android:layout_height="38dp"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="211dp"
-        android:layout_centerHorizontal="true"
+        android:layout_marginTop="225dp"
+        android:fontFamily="@font/arial"
         android:text="@string/transaction_text_amount"
         android:textAlignment="center"
-        android:textSize="20sp"
-        android:fontFamily="@font/arial"/>
+        android:textSize="20sp" />
 
     <EditText
         android:id="@+id/activity_transaction_message_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="175dp"
+        android:layout_marginBottom="160dp"
         android:layout_centerHorizontal="true"
         android:ems="10"
         android:hint="@string/transaction_text_message_hint"

@@ -35,6 +35,8 @@ public class FeaturesActivity extends AppCompatActivity {
         balanceButton = findViewById(R.id.balance_button);
         logoutButton = findViewById(R.id.logout_button);
 
+        context = getApplicationContext();
+
 
         /*
         Button for withdrawal view
@@ -43,7 +45,7 @@ public class FeaturesActivity extends AppCompatActivity {
             context = v.getContext();
             Intent intent = new Intent(context, WithdrawalActivity.class);
             context.startActivity(intent);
-            overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+            overridePendingTransition(R.anim.fadein, R.anim.slide_out);
 
         });
 
@@ -54,7 +56,7 @@ public class FeaturesActivity extends AppCompatActivity {
             context = v.getContext();
             Intent intent = new Intent(context, BalanceActivity.class);
             context.startActivity(intent);
-            overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+            overridePendingTransition(R.anim.fadein, R.anim.slide_out);
 
         });
 
@@ -65,7 +67,7 @@ public class FeaturesActivity extends AppCompatActivity {
             context = v.getContext();
             Intent intent = new Intent(context, DepositActivity.class);
             context.startActivity(intent);
-            overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+            overridePendingTransition(R.anim.fadein, R.anim.slide_out);
 
         });
 
@@ -76,7 +78,7 @@ public class FeaturesActivity extends AppCompatActivity {
             context = v.getContext();
             Intent intent = new Intent(context, TransactionActivity.class);
             context.startActivity(intent);
-            overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+            overridePendingTransition(R.anim.fadein, R.anim.slide_out);
 
         });
         /*
@@ -86,18 +88,31 @@ public class FeaturesActivity extends AppCompatActivity {
             context = v.getContext();
             Intent intent = new Intent(context, AccountEventsActivity.class);
             context.startActivity(intent);
-            overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+            overridePendingTransition(R.anim.fadein, R.anim.slide_out);
 
         });
         /*
         Button for logout view
          */
         logoutButton.setOnClickListener(v -> {
-            context = v.getContext();
+            //context = v.getContext();
             Intent intent = new Intent(context, LogoutActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(intent);
-            overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+            overridePendingTransition(R.anim.fadein, R.anim.slide_out);
         });
     }
 
+    /**
+     * Back button disabled for this activity temporary
+     */
+
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+        //Intent intent = new Intent(context, LogoutActivity.class);
+        //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        //startActivity(intent);
+        //overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+    }
 }

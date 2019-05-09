@@ -17,11 +17,11 @@ import com.google.firebase.firestore.Transaction;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
+
 import androidx.annotation.NonNull;
 
 /**
  * This is a helper class for database operations.
- *
  */
 
 public class DatabaseController {
@@ -61,6 +61,7 @@ public class DatabaseController {
 
     /**
      * Returns a instance of database
+     *
      * @return
      */
     public static DatabaseController getInstance() {
@@ -72,6 +73,7 @@ public class DatabaseController {
 
     /**
      * Returns logged in account
+     *
      * @return
      */
     public String getLoggedInAccountId() {
@@ -80,40 +82,42 @@ public class DatabaseController {
 
     /**
      * Login functionality
+     *
      * @param accountId
      * @param pinCode
      * @param onLoginListener
      */
     public void login(String accountId, String pinCode, OnLoginListener onLoginListener) {
-        db.collection("accounts").document(accountId)
-                .get()
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        DocumentSnapshot documentSnapshot = task.getResult();
+            db.collection("accounts").document(accountId)
+                    .get()
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            DocumentSnapshot documentSnapshot = task.getResult();
 
-                        if (documentSnapshot != null && documentSnapshot.exists()) {
-                            Log.d(TAG, "DocumentSnapshot data: " + documentSnapshot.getData());
+                            if (documentSnapshot != null && documentSnapshot.exists()) {
+                                Log.d(TAG, "DocumentSnapshot data: " + documentSnapshot.getData());
 
-                            Long pin = documentSnapshot.getLong("account_password");
+                                Long pin = documentSnapshot.getLong("account_password");
 
-                            Long givenPin = Long.parseLong(pinCode);
+                                Long givenPin = Long.parseLong(pinCode);
 
-                            if (givenPin.equals(pin)) {
-                                loggedInAccountId = accountId;
-                                onLoginListener.loginSuccess();
+                                if (givenPin.equals(pin)) {
+                                    loggedInAccountId = accountId;
+                                    onLoginListener.loginSuccess();
+                                } else {
+                                    onLoginListener.loginFailed();
+                                }
                             } else {
                                 onLoginListener.loginFailed();
+                                Log.d(TAG, "get failed with ", task.getException());
                             }
-                        } else {
-                            onLoginListener.loginFailed();
-                            Log.d(TAG, "get failed with ", task.getException());
                         }
-                    }
-                });
+                    });
     }
 
     /**
      * Deposit functionality
+     *
      * @param depositAmount
      */
     public void deposit(final int depositAmount) {
@@ -136,6 +140,7 @@ public class DatabaseController {
 
     /**
      * Withdrawal functionality
+     *
      * @param withdrawAmount
      */
     public void withdrawal(int withdrawAmount) {
@@ -158,6 +163,7 @@ public class DatabaseController {
 
     /**
      * Changes the balance
+     *
      * @param amount
      * @param balanceChangeListener
      */
@@ -195,6 +201,7 @@ public class DatabaseController {
 
     /**
      * Transaction functionality
+     *
      * @param accountId
      * @param transactionAmount
      * @param message
@@ -242,6 +249,7 @@ public class DatabaseController {
 
     /**
      * Fetches the account balance from database
+     *
      * @param callback
      */
     public void fetchAccountBalance(BalanceListener callback) {
@@ -264,6 +272,7 @@ public class DatabaseController {
 
     /**
      * Creates a event
+     *
      * @param accountId
      * @param eventType
      * @param balanceChange
@@ -323,6 +332,7 @@ public class DatabaseController {
 
     /**
      * Creates a account
+     *
      * @param accountId
      * @param balance
      * @param pinCode

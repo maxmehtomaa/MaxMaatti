@@ -2,14 +2,20 @@ package com.choicely.maxmaatti.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.SystemClock;
+import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.choicely.maxmaatti.db.DatabaseController;
@@ -27,6 +33,7 @@ public class LoginActivity extends AppCompatActivity {
     private TextView loginFailed;
     private TextView loginText;
     private Context context;
+    private ProgressBar progressBar;
     private Animation bottomAnimation;
     private Animation topAnimation;
 
@@ -40,6 +47,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+
         db = FirebaseFirestore.getInstance();
 
         context = getApplicationContext();
@@ -49,7 +57,12 @@ public class LoginActivity extends AppCompatActivity {
         cardNumberText = findViewById(R.id.card_number_field);
         pinCodeText = findViewById(R.id.pin_code_field);
         loginFailed = findViewById(R.id.login_failed);
+        progressBar = findViewById(R.id.progress_bar);
 
+
+        progressBar.setVisibility(View.INVISIBLE);
+
+        loginButton.setEnabled(true);
 
         bottomAnimation = AnimationUtils.loadAnimation(LoginActivity.this, R.anim.frombottom);
         topAnimation = AnimationUtils.loadAnimation(LoginActivity.this, R.anim.fromtop);
@@ -58,21 +71,23 @@ public class LoginActivity extends AppCompatActivity {
         loginText.setAnimation(topAnimation);
 
         loginButton.setOnClickListener(v -> {
-            DatabaseController.getInstance().login(cardNumberText.getText().toString(), pinCodeText.getText().toString(), new DatabaseController.OnLoginListener() {
-                @Override
-                public void loginSuccess() {
-                    onLoginSuccess();
-                }
+            final String cardNumber = cardNumberText.getText().toString();
+            final String pinCode = pinCodeText.getText().toString();
 
-                @Override
-                public void loginFailed() {
-                    onLoginFailed();
-                }
-            });
+            if (!TextUtils.isEmpty(cardNumber) && !TextUtils.isEmpty(pinCode)) {
+                DatabaseController.getInstance().login(cardNumber, pinCode, new DatabaseController.OnLoginListener() {
+                    @Override
+                    public void loginSuccess() {
+                        onLoginSuccess();
+                    }
+                    @Override
+                    public void loginFailed() {
+                        onLoginFailed();
+                    }
+                });
+            }
         });
     }
-
-
     /**
      * If login failed
      */
@@ -80,27 +95,28 @@ public class LoginActivity extends AppCompatActivity {
         Log.d(TAG, "Failed to login. Please try again!");
         loginFailed.setText("Failed to login. Please try again.");
     }
-
     /**
      * If login is successful, start FeaturesActivity
      */
     private void onLoginSuccess() {
+        progressBar.setVisibility(View.VISIBLE);
+        loginButton.setEnabled(false);
+        loginButton.setClickable(false);
         Log.d(TAG, "Logged in succesfully ");
         Intent intent = new Intent(context, FeaturesActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);
-        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+
+        overridePendingTransition(R.anim.fadein, R.anim.slide_out);
         finish();
     }
-
     /**
-     * Back button disabled for this activity
+     * Back button disabled for this activity temporary
      */
     @Override
     public void onBackPressed() {
 
     }
-
 }
 
 

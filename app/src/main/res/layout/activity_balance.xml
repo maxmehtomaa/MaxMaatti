@@ -34,4 +34,5 @@
         android:layout_marginRight="0dp"
         android:textSize="30sp"
         android:fontFamily="@font/arial"/>
+
 </RelativeLayout>
