@@ -2,24 +2,27 @@ package com.choicely.maxmaatti.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.SystemClock;
+import android.text.Layout;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.choicely.maxmaatti.db.DatabaseController;
 import com.choicely.maxmaatti.R;
+import com.google.api.Distribution;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 /**
@@ -28,6 +31,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 public class LoginActivity extends AppCompatActivity {
 
     private Button loginButton;
+    private Button aboutButton;
     private EditText cardNumberText;
     private EditText pinCodeText;
     private TextView loginFailed;
@@ -36,7 +40,6 @@ public class LoginActivity extends AppCompatActivity {
     private ProgressBar progressBar;
     private Animation bottomAnimation;
     private Animation topAnimation;
-
 
     private static final String TAG = "LoginActivity";
 
@@ -58,10 +61,18 @@ public class LoginActivity extends AppCompatActivity {
         pinCodeText = findViewById(R.id.pin_code_field);
         loginFailed = findViewById(R.id.login_failed);
         progressBar = findViewById(R.id.progress_bar);
+        aboutButton = findViewById(R.id.about_popup_button);
 
+        aboutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, AboutActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+            }
+        });
 
         progressBar.setVisibility(View.INVISIBLE);
-
         loginButton.setEnabled(true);
 
         bottomAnimation = AnimationUtils.loadAnimation(LoginActivity.this, R.anim.frombottom);
@@ -80,6 +91,7 @@ public class LoginActivity extends AppCompatActivity {
                     public void loginSuccess() {
                         onLoginSuccess();
                     }
+
                     @Override
                     public void loginFailed() {
                         onLoginFailed();
@@ -88,6 +100,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
     /**
      * If login failed
      */
@@ -95,6 +108,7 @@ public class LoginActivity extends AppCompatActivity {
         Log.d(TAG, "Failed to login. Please try again!");
         loginFailed.setText("Failed to login. Please try again.");
     }
+
     /**
      * If login is successful, start FeaturesActivity
      */
@@ -110,6 +124,7 @@ public class LoginActivity extends AppCompatActivity {
         overridePendingTransition(R.anim.fadein, R.anim.slide_out);
         finish();
     }
+
     /**
      * Back button disabled for this activity temporary
      */
@@ -117,6 +132,7 @@ public class LoginActivity extends AppCompatActivity {
     public void onBackPressed() {
 
     }
+
 }
 
 

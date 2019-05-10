@@ -6,6 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".activities.LoginActivity">
 
+    <com.choicely.maxmaatti.activities.CoinView
+        android:id="@+id/my_coin_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
     <TextView
         android:id="@+id/login_text"
         android:layout_width="134dp"
@@ -52,6 +58,12 @@
         android:layout_centerHorizontal="true"
         android:text="@string/login_text"
         android:fontFamily="@font/arial"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/about_popup_button"
+        android:text="@string/about_button"/>
 
     <TextView
         android:id="@+id/login_failed"

@@ -45,7 +45,7 @@ public class FeaturesActivity extends AppCompatActivity {
             context = v.getContext();
             Intent intent = new Intent(context, WithdrawalActivity.class);
             context.startActivity(intent);
-            overridePendingTransition(R.anim.fadein, R.anim.slide_out);
+            overridePendingTransition(R.anim.fadein, R.anim.slide_right_to_left);
 
         });
 
@@ -67,7 +67,7 @@ public class FeaturesActivity extends AppCompatActivity {
             context = v.getContext();
             Intent intent = new Intent(context, DepositActivity.class);
             context.startActivity(intent);
-            overridePendingTransition(R.anim.fadein, R.anim.slide_out);
+            overridePendingTransition(R.anim.fadein, R.anim.slide_right_to_left);
 
         });
 
@@ -78,7 +78,7 @@ public class FeaturesActivity extends AppCompatActivity {
             context = v.getContext();
             Intent intent = new Intent(context, TransactionActivity.class);
             context.startActivity(intent);
-            overridePendingTransition(R.anim.fadein, R.anim.slide_out);
+            overridePendingTransition(R.anim.fadein, R.anim.slide_right_to_left);
 
         });
         /*

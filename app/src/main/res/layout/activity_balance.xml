@@ -6,6 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".activities.BalanceActivity">
 
+    <com.choicely.maxmaatti.activities.CoinView
+        android:id="@+id/my_coin_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
     <TextView
         android:id="@+id/balance_text"
         android:textAlignment="center"
@@ -34,5 +39,7 @@
         android:layout_marginRight="0dp"
         android:textSize="30sp"
         android:fontFamily="@font/arial"/>
+
+
 
 </RelativeLayout>

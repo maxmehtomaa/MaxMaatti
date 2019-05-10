@@ -45,8 +45,9 @@
     <string name="login_text_hint"><i>Card number</i></string>
     <string name="login_pin_hint"><i>PIN code</i></string>
 
-    <string name="about_creator">Max Mehtomaa</string>
+    <string name="about_creator">© 2019 Max Mehtomaa</string>
     <string name="about_name">MaxMaatti</string>
+    <string name="about_button">About</string>
 
 
 </resources>

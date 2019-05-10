@@ -63,7 +63,7 @@ public class TransactionActivity extends AppCompatActivity {
     @Override
     public void finish() {
         super.finish();
-        overridePendingTransition(R.anim.fadein, R.anim.slide_right_to_left);
+        overridePendingTransition(R.anim.fadein, R.anim.slide_out);
 
     }
 }
