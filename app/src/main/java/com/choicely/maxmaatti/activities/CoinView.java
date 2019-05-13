@@ -1,12 +1,19 @@
 package com.choicely.maxmaatti.activities;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.PointF;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
 import android.graphics.RectF;
+import android.graphics.Xfermode;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Handler;
 import android.util.AttributeSet;
@@ -15,6 +22,9 @@ import android.view.View;
 import android.view.ViewTreeObserver;
 
 import androidx.annotation.Nullable;
+import androidx.core.graphics.BitmapCompat;
+
+import com.choicely.maxmaatti.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,6 +39,9 @@ public class CoinView extends View {
     private final Random random = new Random();
     private final List<PointF> list = new ArrayList<>();
     private boolean isRunning = false;
+    private Bitmap resized20Bitmap;
+    private Bitmap resizedBitmap;
+    private Bitmap resized50Bitmap;
 
     public CoinView(Context context) {
         super(context);
@@ -41,7 +54,14 @@ public class CoinView extends View {
     }
 
     private void init() {
-        paint.setColor(Color.RED);
+        Bitmap bitmap50 = BitmapFactory.decodeResource(getResources(), R.drawable.kisspng_50_euro);
+        resized50Bitmap = Bitmap.createScaledBitmap(bitmap50, 350, 200, false);
+        //Bitmap bitmap20 = BitmapFactory.decodeResource(getResources(), R.drawable.kisspng_20_euro_min);
+        //resized20Bitmap = Bitmap.createScaledBitmap(bitmap20, 350, 200, false);
+//        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.kisspng_50cnt_euro);
+//        resizedBitmap = Bitmap.createScaledBitmap(bitmap, 200, 200, false);
+        paint.setColor(Color.YELLOW);
+
     }
 
     @Override
@@ -51,10 +71,10 @@ public class CoinView extends View {
     }
 
     public void createPoints(int width, int height) {
-//        if(!list.isEmpty()) {
+        //if(!list.isEmpty()) {
         // TODO: if we want to create points only once, then return this commented out part
-//            return;
-//        }
+          //  return;
+        //}
         int offset = 10*50;
         for (int i = 0; i < 10; i++) {
             PointF p = new PointF();
@@ -92,7 +112,10 @@ public class CoinView extends View {
         super.onDraw(canvas);
         for (PointF p : list) {
             p.offset(0, 1);
-            canvas.drawCircle(p.x, p.y, 50, paint);
+            canvas.drawBitmap(resized50Bitmap, p.x, p.y, paint);
+            //canvas.drawBitmap(resized20Bitmap, p.x, p.y, paint);
+            //canvas.drawBitmap(resizedBitmap, p.x, p.y, paint);
+            //canvas.drawCircle(p.x, p.y, 50, paint);
         }
     }
 }
