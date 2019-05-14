@@ -38,7 +38,9 @@ public class EventAdapter extends FirestoreRecyclerAdapter<AtmEvent, EventAdapte
         Format formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:SS");
 
 
-        holder.eventTypeText.setText(e.getEvent_type());
+        //Capitalizes event types first letter
+        holder.eventTypeText.setText(e.getEvent_type().substring(0, 1).toUpperCase() + e.getEvent_type().substring(1).toLowerCase());
+
         holder.balanceChangeText.setText(Integer.toString(e.getBalance_change()) + " €");
         holder.descriptionText.setText(e.getDescription());
         holder.dateText.setText(formatter.format(e.getEvent_time()));

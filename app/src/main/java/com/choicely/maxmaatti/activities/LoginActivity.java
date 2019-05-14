@@ -63,13 +63,10 @@ public class LoginActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.progress_bar);
         aboutButton = findViewById(R.id.about_popup_button);
 
-        aboutButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, AboutActivity.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.fadein, R.anim.fadeout);
-            }
+        aboutButton.setOnClickListener(v -> {
+            Intent intent = new Intent(context, AboutActivity.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.fadein, R.anim.fadeout);
         });
 
         progressBar.setVisibility(View.INVISIBLE);
@@ -116,7 +113,7 @@ public class LoginActivity extends AppCompatActivity {
         progressBar.setVisibility(View.VISIBLE);
         loginButton.setEnabled(false);
         loginButton.setClickable(false);
-        Log.d(TAG, "Logged in succesfully ");
+        Log.d(TAG, "Logged in successfully ");
         Intent intent = new Intent(context, FeaturesActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);

@@ -6,42 +6,36 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Point;
-import android.graphics.PointF;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffXfermode;
-import android.graphics.RectF;
-import android.graphics.Xfermode;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
-import android.os.Build;
-import android.os.Handler;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
-import android.view.ViewTreeObserver;
 
 import androidx.annotation.Nullable;
-import androidx.core.graphics.BitmapCompat;
 
 import com.choicely.maxmaatti.R;
+import com.choicely.maxmaatti.model.Coin;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Random;
-import java.util.Timer;
 
 public class CoinView extends View {
 
     private static final String TAG = "CoinView";
+
     private final Paint paint = new Paint();
     private final Random random = new Random();
-    private final List<PointF> list = new ArrayList<>();
+
     private boolean isRunning = false;
-    private Bitmap resized20Bitmap;
-    private Bitmap resizedBitmap;
-    private Bitmap resized50Bitmap;
+
+    private Bitmap resized5Cents;
+    private Bitmap resized10Cents;
+    private Bitmap resized20Cents;
+    private Bitmap resized50Cents;
+    private Bitmap resized1Euro;
+    private Bitmap resized2Euro;
+
+    private final ArrayList<Coin> coins = new ArrayList<>();
 
     public CoinView(Context context) {
         super(context);
@@ -54,43 +48,100 @@ public class CoinView extends View {
     }
 
     private void init() {
-        Bitmap bitmap50 = BitmapFactory.decodeResource(getResources(), R.drawable.kisspng_50_euro);
-        resized50Bitmap = Bitmap.createScaledBitmap(bitmap50, 350, 200, false);
-        //Bitmap bitmap20 = BitmapFactory.decodeResource(getResources(), R.drawable.kisspng_20_euro_min);
-        //resized20Bitmap = Bitmap.createScaledBitmap(bitmap20, 350, 200, false);
-//        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.kisspng_50cnt_euro);
-//        resizedBitmap = Bitmap.createScaledBitmap(bitmap, 200, 200, false);
+        Bitmap fiveCents = BitmapFactory.decodeResource(getResources(), R.drawable.kisspng_5_cent);
+        Bitmap tenCents = BitmapFactory.decodeResource(getResources(), R.drawable.kisspng_10_cent);
+        Bitmap twentyCents = BitmapFactory.decodeResource(getResources(), R.drawable.kisspng_20_cent);
+        Bitmap fiftyCents = BitmapFactory.decodeResource(getResources(), R.drawable.kisspng_50cnt_euro);
+        Bitmap oneEuro = BitmapFactory.decodeResource(getResources(), R.drawable.kisspng_1_euro);
+        Bitmap twoEuro = BitmapFactory.decodeResource(getResources(), R.drawable.kisspng_2_euro);
+
+        resized5Cents = Bitmap.createScaledBitmap(fiveCents, 200, 200, false);
+        resized10Cents = Bitmap.createScaledBitmap(tenCents, 300, 300, false);
+        resized20Cents = Bitmap.createScaledBitmap(twentyCents, 200, 200, false);
+        resized50Cents = Bitmap.createScaledBitmap(fiftyCents, 200, 200, false);
+        resized1Euro = Bitmap.createScaledBitmap(oneEuro, 200, 200, false);
+        resized2Euro = Bitmap.createScaledBitmap(twoEuro, 200, 200, false);
+
         paint.setColor(Color.YELLOW);
 
+        setOnClickListener(onGravityChangeListener);
+        setClickable(true);
     }
+
 
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
-        createPoints(w, h);
+        createCoins(w, h);
     }
 
-    public void createPoints(int width, int height) {
+    public void createCoins(int width, int height) {
         //if(!list.isEmpty()) {
         // TODO: if we want to create points only once, then return this commented out part
-          //  return;
+        //  return;
         //}
-        int offset = 10*50;
+        int offset = 10 * 50;
         for (int i = 0; i < 10; i++) {
-            PointF p = new PointF();
-            list.add(p);
+            Coin c = new Coin();
+            c.setBitmap(getRandomBitmap());
+            coins.add(c);
             int x = random.nextInt(width);
             int y = -random.nextInt(offset);
 //            int y = 0;
-            p.set(x, y);
+            c.getPoint().set(x, y);
         }
-        Log.d(TAG, String.format("created %d items for size[%d, %d]", list.size(), width, height));
+        Log.d(TAG, String.format("created %d items for size[%d, %d]", coins.size(), width, height));
         startAnimation();
     }
+
+    private Bitmap getRandomBitmap() {
+        int r = random.nextInt(6);
+        Bitmap bm;
+        switch (r) {
+            default:
+            case 0:
+                bm = resized1Euro;
+                break;
+            case 1:
+                bm = resized2Euro;
+                break;
+            case 2:
+                bm = resized50Cents;
+                break;
+            case 3:
+                bm = resized20Cents;
+                break;
+            case 4:
+                bm = resized10Cents;
+                break;
+            case 5:
+                bm = resized5Cents;
+                break;
+
+        }
+        return bm;
+    }
+
+    int gravity = Gravity.BOTTOM;
+
+    private OnClickListener onGravityChangeListener = new OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if (gravity == Gravity.BOTTOM) {
+                gravity = Gravity.TOP;
+            } else {
+                gravity = Gravity.BOTTOM;
+            }
+        }
+    };
 
     private Runnable update = new Runnable() {
         @Override
         public void run() {
+            for (Coin c : coins) {
+                c.move(gravity, 2);
+            }
+
             postInvalidate();
             if (isRunning) {
                 CoinView.this.postDelayed(update, 1000 / 60);
@@ -110,11 +161,8 @@ public class CoinView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        for (PointF p : list) {
-            p.offset(0, 1);
-            canvas.drawBitmap(resized50Bitmap, p.x, p.y, paint);
-            //canvas.drawBitmap(resized20Bitmap, p.x, p.y, paint);
-            //canvas.drawBitmap(resizedBitmap, p.x, p.y, paint);
+        for (Coin c : coins) {
+            c.draw(canvas);
             //canvas.drawCircle(p.x, p.y, 50, paint);
         }
     }

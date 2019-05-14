@@ -107,10 +107,9 @@ public class WithdrawalActivity extends AppCompatActivity {
 
             } else {
                 CharSequence text = "Enter the amount you want to withdraw!";
-                Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, text, duration).show();
             }
         });
-
     }
 
     @Override
