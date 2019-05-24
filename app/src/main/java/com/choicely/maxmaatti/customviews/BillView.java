@@ -1,4 +1,4 @@
-package com.choicely.maxmaatti.activities;
+package com.choicely.maxmaatti.customviews;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -129,7 +129,6 @@ public class BillView extends View {
     private void startAnimation() {
         isRunning = true;
         post(update);
-
     }
 
     private void stopAnimation() {

@@ -1,16 +1,12 @@
 package com.choicely.maxmaatti.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.animation.Animator;
-import android.os.Build;
 import android.os.Bundle;
-import android.view.View;
-import android.view.ViewAnimationUtils;
 import android.widget.TextView;
 
-import com.choicely.maxmaatti.db.DatabaseController;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.choicely.maxmaatti.R;
+import com.choicely.maxmaatti.db.DatabaseController;
 
 import java.util.Locale;
 

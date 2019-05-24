@@ -1,28 +1,22 @@
 package com.choicely.maxmaatti.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Layout;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.PopupWindow;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.choicely.maxmaatti.db.DatabaseController;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.choicely.maxmaatti.R;
-import com.google.api.Distribution;
+import com.choicely.maxmaatti.db.DatabaseController;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 /**

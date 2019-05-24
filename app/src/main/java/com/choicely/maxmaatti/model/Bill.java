@@ -24,6 +24,7 @@ public class Bill {
     }
 
 
+
     public void move(int gravity, int change) {
         if (gravity == Gravity.BOTTOM) {
             point.offset(0, change);

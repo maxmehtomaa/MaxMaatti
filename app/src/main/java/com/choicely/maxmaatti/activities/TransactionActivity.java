@@ -1,19 +1,15 @@
 package com.choicely.maxmaatti.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.View;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.choicely.maxmaatti.R;
 import com.choicely.maxmaatti.db.DatabaseController;
-
-import org.w3c.dom.Text;
 
 /**
  * This is a user interface for transaction functionality

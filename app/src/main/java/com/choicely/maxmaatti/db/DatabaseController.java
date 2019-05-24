@@ -2,6 +2,8 @@ package com.choicely.maxmaatti.db;
 
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+
 import com.choicely.maxmaatti.model.AtmEvent;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -17,8 +19,6 @@ import com.google.firebase.firestore.Transaction;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
-
-import androidx.annotation.NonNull;
 
 /**
  * This is a helper class for database operations.

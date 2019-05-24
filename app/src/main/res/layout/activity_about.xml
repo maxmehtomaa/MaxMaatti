@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activities.AboutActivity">
 
 
-    <com.choicely.maxmaatti.activities.BillView
-        android:id="@+id/my_bill_view"
+    <com.choicely.maxmaatti.customviews.CoinView
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
+        android:layout_height="match_parent"
+        android:id="@+id/coin_view"/>
 
     <TextView
         android:id="@+id/by_text"
@@ -39,6 +37,5 @@
         android:layout_centerHorizontal="true"
         android:text="@string/about_creator"
         android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
 
 </RelativeLayout>

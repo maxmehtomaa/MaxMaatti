@@ -1,20 +1,18 @@
 package com.choicely.maxmaatti.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.choicely.maxmaatti.db.DatabaseController;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.choicely.maxmaatti.R;
+import com.choicely.maxmaatti.db.DatabaseController;
 
 public class DepositActivity extends AppCompatActivity {
 

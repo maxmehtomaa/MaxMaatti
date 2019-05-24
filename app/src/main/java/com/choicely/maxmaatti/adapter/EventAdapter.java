@@ -1,4 +1,4 @@
-package adapter;
+package com.choicely.maxmaatti.adapter;
 
 import android.graphics.Color;
 import android.view.LayoutInflater;

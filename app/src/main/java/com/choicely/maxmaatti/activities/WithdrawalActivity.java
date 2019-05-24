@@ -1,7 +1,5 @@
 package com.choicely.maxmaatti.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -9,8 +7,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.choicely.maxmaatti.db.DatabaseController;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.choicely.maxmaatti.R;
+import com.choicely.maxmaatti.db.DatabaseController;
 
 /**
  * This is a user interface for withdrawal functionality

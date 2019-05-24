@@ -1,4 +1,4 @@
-package com.choicely.maxmaatti.activities;
+package com.choicely.maxmaatti.customviews;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -23,7 +23,7 @@ public class CoinView extends View {
 
     private static final String TAG = "CoinView";
 
-    private final Paint paint = new Paint();
+    private final Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
     private final Random random = new Random();
 
     private boolean isRunning = false;
@@ -35,7 +35,10 @@ public class CoinView extends View {
     private Bitmap resized1Euro;
     private Bitmap resized2Euro;
 
+    //private RectF coinSlot;
+
     private final ArrayList<Coin> coins = new ArrayList<>();
+
 
     public CoinView(Context context) {
         super(context);
@@ -62,7 +65,8 @@ public class CoinView extends View {
         resized1Euro = Bitmap.createScaledBitmap(oneEuro, 200, 200, false);
         resized2Euro = Bitmap.createScaledBitmap(twoEuro, 200, 200, false);
 
-        paint.setColor(Color.YELLOW);
+
+        paint.setColor(Color.BLUE);
 
         setOnClickListener(onGravityChangeListener);
         setClickable(true);
@@ -73,7 +77,10 @@ public class CoinView extends View {
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
         createCoins(w, h);
+        float leftMultiplier = 0.3F;
+//        coinSlot = new RectF(w * leftMultiplier, h * 0.5F, w * (1 - leftMultiplier), h * 0.7F);
     }
+
 
     public void createCoins(int width, int height) {
         //if(!list.isEmpty()) {
@@ -124,14 +131,11 @@ public class CoinView extends View {
 
     int gravity = Gravity.BOTTOM;
 
-    private OnClickListener onGravityChangeListener = new OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            if (gravity == Gravity.BOTTOM) {
-                gravity = Gravity.TOP;
-            } else {
-                gravity = Gravity.BOTTOM;
-            }
+    private OnClickListener onGravityChangeListener = v -> {
+        if (gravity == Gravity.BOTTOM) {
+            gravity = Gravity.TOP;
+        } else {
+            gravity = Gravity.BOTTOM;
         }
     };
 
@@ -161,9 +165,15 @@ public class CoinView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+
+        // For drawing coins
         for (Coin c : coins) {
             c.draw(canvas);
-            //canvas.drawCircle(p.x, p.y, 50, paint);
         }
+
+        //For drawing coin slot
+        //canvas.drawRect(coinSlot, paint);
     }
 }
+
+

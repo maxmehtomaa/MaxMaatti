@@ -1,20 +1,19 @@
 package com.choicely.maxmaatti.activities;
 
+import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.Bundle;
-
 import com.choicely.maxmaatti.R;
-import com.choicely.maxmaatti.model.AtmEvent;
+import com.choicely.maxmaatti.adapter.EventAdapter;
 import com.choicely.maxmaatti.db.DatabaseController;
+import com.choicely.maxmaatti.model.AtmEvent;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
-
-import adapter.EventAdapter;
 
 /**
  * User interface for account events.

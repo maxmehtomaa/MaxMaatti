@@ -33,6 +33,5 @@ public class Coin {
             point.offset(0, -change);
         }
 
-
     }
 }
